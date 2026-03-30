@@ -2129,6 +2129,28 @@ async function handleOAuthCallback() {
   }
 }
 
+function updAirtableBtn() {
+  const btn = document.getElementById('airtable-sync-btn');
+  if (!btn) return;
+  const s = state.airtableStatus;
+  if (s === 'loading') {
+    btn.textContent = '\u27f3 Syncing\u2026';
+    btn.style.background = 'rgba(138,184,122,.12)';
+    btn.style.color = 'var(--sage)';
+  } else if (s === 'ok') {
+    btn.textContent = '\u2713 Airtable Synced';
+    btn.style.background = 'rgba(138,184,122,.12)';
+    btn.style.color = 'var(--sage)';
+  } else if (s === 'error') {
+    btn.textContent = '\u26a0 Sync Error';
+    btn.style.background = 'rgba(234,67,53,.12)';
+    btn.style.color = '#ea4335';
+  } else {
+    btn.textContent = '\u27f3 Sync Airtable';
+    btn.style.background = '';
+    btn.style.color = '';
+  }
+}
 function updGmailBtn() {
   const btn   = document.getElementById('gmail-connect-btn');
   const label = document.getElementById('gmail-btn-label');
@@ -2434,6 +2456,50 @@ function init() {
   }
 }
 
+// Expose functions to global scope for HTML onclick handlers
+window.state = state;
+window.obTestAirtable = obTestAirtable;
+window.obSaveAndLaunch = obSaveAndLaunch;
+window.obSkip = obSkip;
+window.setView = setView;
+window.openDripDashboard = openDripDashboard;
+window.syncAirtable = syncAirtable;
+window.startGmailOAuth = startGmailOAuth;
+window.save = save;
+window.showToast = showToast;
+window.exportCSV = exportCSV;
+window.addManual = addManual;
+window.bulkEmail = bulkEmail;
+window.bulkMarkCalled = bulkMarkCalled;
+window.clearSelection = clearSelection;
+window.openSchedCompose = openSchedCompose;
+window.svSaveScheduled = svSaveScheduled;
+window.svSendNow = svSendNow;
+window.closeSchedCompose = closeSchedCompose;
+window.closeDrawer = closeDrawer;
+window.closeEmailModal = closeEmailModal;
+window.switchTemplate = switchTemplate;
+window.generateAIEmail = generateAIEmail;
+window.sendGmail = sendGmail;
+window.sendOutlook = sendOutlook;
+window.sendMailto = sendMailto;
+window.copyEmailToClip = copyEmailToClip;
+window.closeCallBrief = closeCallBrief;
+window.logCall = logCall;
+window.openPostCallEmail = openPostCallEmail;
+window.renderCallBrief = renderCallBrief;
+window.generateCallBrief = generateCallBrief;
+window.closeDripDashboard = closeDripDashboard;
+window.closeSetup = closeSetup;
+window.saveSetup = saveSetup;
+window.closeScheduler = closeScheduler;
+window.schedApplyTemplate = schedApplyTemplate;
+window.saveScheduled = saveScheduled;
+window.sendViaGmail = sendViaGmail;
+window.sendViaOutlook = sendViaOutlook;
+window.recordEmailSent = recordEmailSent;
+window.renderAll = renderAll;
+window.updAirtableBtn = updAirtableBtn;
 init();
 
 function schedApplyTemplate(key, btn) {
