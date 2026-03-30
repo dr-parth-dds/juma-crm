@@ -2456,6 +2456,20 @@ function init() {
   }
 }
 
+function copyEmailToClip() {
+  let ep = getEmailParts();
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText('Subject: ' + ep.subj + '\n\n' + ep.body).catch(function(){});
+  }
+  showToast('Copied to clipboard', 'ok');
+}
+
+function clearSelection() {
+  state.selected.clear();
+  renderPipeTable();
+  renderCounts();
+}
+
 // Expose functions to global scope for HTML onclick handlers
 window.state = state;
 window.obTestAirtable = obTestAirtable;
