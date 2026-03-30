@@ -25,8 +25,9 @@ exports.handler = async (event) => {
     return cors(400, JSON.stringify({ error: 'No Airtable PAT configured' }));
   }
 
-  // Strip /api/airtable prefix to get the Airtable path
-  const rawPath = event.path.replace(/^\/?api\/airtable\/?/, '');
+  // Strip prefix and convert bases/:id/tables/:name to :id/:name for Airtable API v0
+  let rawPath = event.path.replace(/^\/?(\.netlify\/functions\/airtable\/?|api\/airtable\/?)/, '');
+  rawPath = rawPath.replace(/^bases\//, '').replace(/\/tables\//, '/');
   const airtableUrl = `https://api.airtable.com/v0/${rawPath}${event.rawQuery ? '?' + event.rawQuery : ''}`;
 
   try {
