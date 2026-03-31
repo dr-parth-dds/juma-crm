@@ -6,7 +6,7 @@
   port = 8888
   targetPort = 3000
 
-# ── Security headers on all routes ──────────────────────────
+# -- Security headers on all routes --
 [[headers]]
   for = "/*"
   [headers.values]
@@ -25,7 +25,7 @@
       frame-src 'none';
     """
 
-# ── API proxy routes → Netlify Functions ────────────────────
+# -- API proxy routes -> Netlify Functions --
 [[redirects]]
   from = "/api/ai"
   to = "/.netlify/functions/ai"
@@ -41,7 +41,12 @@
   to = "/.netlify/functions/gmail/:splat"
   status = 200
 
-# ── SPA fallback ─────────────────────────────────────────────
+[[redirects]]
+  from = "/api/enrich/*"
+  to = "/.netlify/functions/enrich/:splat"
+  status = 200
+
+# -- SPA fallback --
 [[redirects]]
   from = "/*"
   to = "/index.html"
